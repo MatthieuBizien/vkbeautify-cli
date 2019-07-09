@@ -1,3 +1,7 @@
 import { Config } from '../types';
 
-export default {} as Partial<Config>;
+export default {
+  indentPattern: 4,
+  minify: false,
+  preserveComments: false
+} as Partial<Config>;

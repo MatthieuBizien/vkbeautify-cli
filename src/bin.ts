@@ -9,16 +9,14 @@ const dependancies: Dependancies = { spinner: ora() };
 
 try {
   commander.option('--config [json]', 'config json');
-  commander.option('--docs-path [path]', 'docs path');
-  commander.option('--output-path [path]', 'output path');
-  commander.option('-p --port [port]', 'server port');
-  commander.option('--open', 'open browser');
-  commander.option('--readme', 'use readme');
-  commander.option('-d --debug', 'debug logging');
-  commander.option('-s --serve', 'run server');
-  commander.option('-v --verbose', 'verbose logging');
+  commander.option('-i --indent-pattern', 'indent pattern');
+  commander.option('-m --minify', 'minify');
+  commander.option('-p --preserve-comments', 'preserve comments');
   commander.action(async (options: Options) => {
     try {
+      if (typeof options === 'string') {
+        options = { indentPattern: options };
+      }
       const config = createConfig(options);
       return action(config, dependancies).catch((err: Error) => {
         return handleError(err, dependancies);

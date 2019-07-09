@@ -3,14 +3,18 @@ export interface Dependancies {
 }
 
 export interface Options {
-  [key: string]: Option;
+  indentPattern?: string;
+  minify?: boolean;
+  preserveComments?: boolean;
 }
 
 export interface Config {
-  env: string;
+  indentPattern: number | string;
+  minify: boolean;
+  preserveComments: boolean;
 }
 
-export type Option = object;
+export type Option = string | boolean;
 
 export interface Spinner {
   clear(): Spinner;
