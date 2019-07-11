@@ -20,11 +20,15 @@ export default function createConfig(
     (options.indentPattern &&
       options.indentPattern.length &&
       options.indentPattern[0] === ' ') ||
-    isNaN(Number(options.indentPattern))
+    Number.isNaN(Number(options.indentPattern))
       ? options.indentPattern
       : Number(options.indentPattern);
   config = {
     ...config,
+    cssFiles: options.cssFiles || config.cssFiles,
+    jsonFiles: options.jsonFiles || config.jsonFiles,
+    sqlFiles: options.sqlFiles || config.sqlFiles,
+    xmlFiles: options.xmlFiles || config.xmlFiles,
     indentPattern:
       indentPattern || typeof indentPattern === 'number'
         ? indentPattern

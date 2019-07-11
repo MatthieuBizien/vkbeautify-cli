@@ -3,15 +3,23 @@ export interface Dependancies {
 }
 
 export interface Options {
+  cssFiles?: string;
   indentPattern?: string;
+  jsonFiles?: string;
   minify?: boolean;
   preserveComments?: boolean;
+  sqlFiles?: string;
+  xmlFiles?: string;
 }
 
 export interface Config {
+  cssFiles: string;
   indentPattern: number | string;
+  jsonFiles: string;
   minify: boolean;
   preserveComments: boolean;
+  sqlFiles: string;
+  xmlFiles: string;
 }
 
 export type Option = string | boolean;

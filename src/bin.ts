@@ -9,6 +9,10 @@ const dependancies: Dependancies = { spinner: ora() };
 
 try {
   commander.option('--config [json]', 'config json');
+  commander.option('--css-files [glob]', 'css files glob');
+  commander.option('--json-files [glob]', 'json files glob');
+  commander.option('--sql-files [glob]', 'sql files glob');
+  commander.option('--xml-files [glob]', 'xml files glob');
   commander.option('-i --indent-pattern', 'indent pattern');
   commander.option('-m --minify', 'minify');
   commander.option('-p --preserve-comments', 'preserve comments');
