@@ -67,7 +67,7 @@ async function formatFile(
       break;
   }
   spinner.info(filePath);
-  return await fs.writeFile(filePath, updatedFile);
+  return fs.writeFile(filePath, updatedFile);
 }
 
 async function glob(pattern: string): Promise<string[]> {
