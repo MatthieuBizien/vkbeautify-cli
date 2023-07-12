@@ -4,6 +4,8 @@
 
 > cli to prettier xml, json, css and sql based on vkbeautify
 
+![](assets/vkbeautify-cli.png)
+
 Please ★ this repo if you found it useful ★ ★ ★
 
 ## Features
