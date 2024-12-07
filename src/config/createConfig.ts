@@ -1,7 +1,6 @@
-import cosmiconfig from 'cosmiconfig';
+import { cosmiconfigSync } from 'cosmiconfig';
 import mergeConfiguration from 'merge-configuration';
 import pkgDir from 'pkg-dir';
-import { oc } from 'ts-optchain.macro';
 import defaultConfig from './defaultConfig';
 import { Config, Option, Options } from '../types';
 
@@ -11,16 +10,16 @@ export default function createConfig(
 ): Config {
   const rootPath = pkgDir.sync(process.cwd()) || process.cwd();
   options = sanitizeOptions(options);
-  const userConfig: Partial<Config> = oc(
-    cosmiconfig('vkbeautify').searchSync(rootPath)
-  ).config({});
+  const explorer = cosmiconfigSync('vkbeautify');
+  const result = explorer.search(rootPath);
+  const userConfig: Partial<Config> = result?.config || {};
   let config = mergeConfiguration(defaultConfig, userConfig);
   config = mergeConfiguration(config, customConfig);
   const indentPattern =
     (options.indentPattern &&
       options.indentPattern.length &&
       options.indentPattern[0] === ' ') ||
-    Number.isNaN(Number(options.indentPattern))
+      Number.isNaN(Number(options.indentPattern))
       ? options.indentPattern
       : Number(options.indentPattern);
   config = {

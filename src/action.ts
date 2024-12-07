@@ -5,7 +5,7 @@ import { Config, Dependancies } from './types';
 
 export default async function action(
   config: Config,
-  dependancies: Dependancies
+  dependancies: Dependancies,
 ) {
   await format('css', await glob(config.cssFiles), config, dependancies);
   await format('json', await glob(config.jsonFiles), config, dependancies);
@@ -18,12 +18,12 @@ async function format(
   fileType: string,
   filePaths: string[],
   config: Config,
-  dependancies: Dependancies
+  dependancies: Dependancies,
 ) {
   return Promise.all(
-    filePaths.map(filePath => {
+    filePaths.map((filePath) => {
       return formatFile(fileType, filePath, config, dependancies);
-    })
+    }),
   );
 }
 
@@ -31,7 +31,7 @@ async function formatFile(
   fileType: string,
   filePath: string,
   config: Config,
-  dependancies: Dependancies
+  dependancies: Dependancies,
 ) {
   const { spinner } = dependancies;
   const file = (await fs.readFile(filePath)).toString();

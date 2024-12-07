@@ -1,22 +1,21 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "declaration": true,
-    "emitDecoratorMetadata": true,
-    "esModuleInterop": true,
-    "experimentalDecorators": true,
-    "incremental": true,
-    "lib": ["ES2018", "ESNext.AsyncIterable"],
-    "module": "CommonJS",
-    "moduleResolution": "Node",
-    "outDir": "lib",
-    "resolveJsonModule": true,
-    "rootDir": "src",
-    "sourceMap": true,
-    "strict": true,
-    "strictPropertyInitialization": false,
-    "target": "ESNext"
+    "target": "ES2020", // A modern target compatible with recent Node versions.
+    "module": "CommonJS", // CommonJS for Node.js compatibility.
+    "lib": ["ES2020"], // ES2020 library definitions.
+    "rootDir": "src", // Your source files are in `src`.
+    "outDir": "lib", // Compiled output goes to `lib`.
+    "strict": true, // Enable all strict type-checking options.
+    "allowSyntheticDefaultImports": true, // Allow default imports from modules without default export.
+    "esModuleInterop": true, // Enables `import default` syntax for CommonJS modules.
+    "experimentalDecorators": true, // Enable decorator support if needed.
+    "emitDecoratorMetadata": true, // Emit metadata for decorators if needed.
+    "incremental": true, // Enable incremental builds for faster re-compilation.
+    "resolveJsonModule": true, // Allows importing .json files.
+    "sourceMap": true, // Generate source maps for debugging.
+    "declaration": true, // Generate .d.ts declaration files.
+    "strictPropertyInitialization": false // If needed; depending on codebase.
   },
   "include": ["src"],
-  "exclude": ["node_modules/**"]
+  "exclude": ["node_modules"]
 }

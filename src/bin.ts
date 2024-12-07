@@ -1,4 +1,4 @@
-import commander from 'commander';
+import { Command } from 'commander';
 import ora from 'ora';
 import action from './action';
 import handleError from './handleError';
@@ -6,30 +6,34 @@ import { Options, Dependancies } from './types';
 import { createConfig } from './config';
 
 const dependancies: Dependancies = { spinner: ora() };
+const program = new Command();
 
 try {
-  commander.option('--config [json]', 'config json');
-  commander.option('--css-files [glob]', 'css files glob');
-  commander.option('--json-files [glob]', 'json files glob');
-  commander.option('--sql-files [glob]', 'sql files glob');
-  commander.option('--xml-files [glob]', 'xml files glob');
-  commander.option('-i --indent-pattern', 'indent pattern');
-  commander.option('-m --minify', 'minify');
-  commander.option('-p --preserve-comments', 'preserve comments');
-  commander.action(async (options: Options) => {
-    try {
-      if (typeof options === 'string') {
-        options = { indentPattern: options };
+  program
+    .option('--config [json]', 'config json')
+    .option('--css-files [glob]', 'css files glob')
+    .option('--json-files [glob]', 'json files glob')
+    .option('--sql-files [glob]', 'sql files glob')
+    .option('--xml-files [glob]', 'xml files glob')
+    .option('-i --indent-pattern', 'indent pattern')
+    .option('-m --minify', 'minify')
+    .option('-p --preserve-comments', 'preserve comments')
+    .action(async (options: Options) => {
+      try {
+        if (typeof options === 'string') {
+          options = { indentPattern: options };
+        }
+        const config = createConfig(options);
+        await action(config, dependancies).catch((err: Error) => {
+          return handleError(err, dependancies);
+        });
+        // Don't return anything here
+      } catch (err) {
+        handleError(err as Error, dependancies);
       }
-      const config = createConfig(options);
-      return action(config, dependancies).catch((err: Error) => {
-        return handleError(err, dependancies);
-      });
-    } catch (err) {
-      return handleError(err, dependancies);
-    }
-  });
-  commander.parse(process.argv);
+    });
+
+  program.parse(process.argv);
 } catch (err) {
-  handleError(err, dependancies);
+  handleError(err as Error, dependancies);
 }
